@@ -139,6 +139,7 @@ def reverse_and_complement(sequence):
         if input == "G":
             complement += "C"
     return complement
+    reverseseq = complement [::-1]
     
 
 def get_longest_peptide(rna_sequence, genetic_code):
