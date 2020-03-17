@@ -31,11 +31,11 @@ def translate_sequence(rna_sequence, genetic_code):
     rna = rna_sequence.upper()
     translation = ""
     if len(rna) >= 3:
+        if len(rna)%3 == 1:
+            rna = rna[:-1]
         for input in range (0, len(rna), 3):
             codon = rna[input:input + 3]
-            translation += genetic_code[codon]
-        if len(rna) == 1:
-            rna = rna[:-1]
+            translation+= genetic_code[codon]
         if "*" in str(translation):
             separate = "*"
             translation = translation.split(separate, 1)[0]
