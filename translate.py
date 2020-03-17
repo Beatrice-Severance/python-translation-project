@@ -99,6 +99,7 @@ def get_complement(sequence):
     """
     sequence = list(sequence.upper())
     print("The sequence is: ", sequence)
+    complement = ""
     for input in sequence:
         if input == "A":
             complement += "U"
@@ -108,6 +109,7 @@ def get_complement(sequence):
             complement += "G"
         if input == "G":
             complement += "C"
+    return complement
 
 def reverse_and_complement(sequence):
     """Get the reversed and complemented form of a `sequence` of nucleotides.
