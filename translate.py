@@ -99,9 +99,15 @@ def get_complement(sequence):
     """
     sequence = list(sequence.upper())
     print("The sequence is: ", sequence)
-    complementseq = sequence [::+1]
-    complement = ("".join(complementseq))
-    return complement
+    for input in sequence:
+        if input == "A":
+            complement += "U"
+        if input == "U":
+            complement += "A"
+        if input == "C":
+            complement += "G"
+        if input == "G":
+            complement += "C"
 
 def reverse_and_complement(sequence):
     """Get the reversed and complemented form of a `sequence` of nucleotides.
