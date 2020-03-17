@@ -128,8 +128,11 @@ def reverse_and_complement(sequence):
     """
     sequence = list(sequence.upper())
     print("The sequence is: ", sequence)
+    reverseseq = sequence [::-1]
+    reverse = ("".join(reverseseq))
+    print(reverse)
     complement = ""
-    for input in sequence:
+    for input in reverse:
         if input == "A":
             complement += "U"
         if input == "U":
@@ -139,8 +142,6 @@ def reverse_and_complement(sequence):
         if input == "G":
             complement += "C"
     return complement
-    reverseseq = complement [::-1]
-    
 
 def get_longest_peptide(rna_sequence, genetic_code):
     """Get the longest peptide encoded by an RNA sequence.
