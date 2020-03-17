@@ -73,7 +73,7 @@ def get_all_translations(rna_sequence, genetic_code):
         A list of strings; each string is an sequence of amino acids encoded by
         `rna_sequence`.
     """
-    pass
+    rna = rna_sequence.upper()
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
