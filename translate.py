@@ -64,10 +64,6 @@ def get_all_translations(rna_sequence, genetic_code):
     pass
 
 def get_reverse(sequence):
-    sequence = input("Enter your sequence here: ")
-    print("The sequence is: ", sequence)
-    reverseseq = sequence [::-1]
-    print("The reverse is: ", reverseseq)
     """Reverse orientation of `sequence`.
 
     Returns a string with `sequence` in the reverse order.
@@ -81,6 +77,13 @@ def get_reverse(sequence):
     >>> get_reverse('ATGC')
     'CGTA'
     """
+    sequence = list(sequence.upper())
+    print("The sequence is: ", sequence)
+    reverseseq = sequence [::-1]
+    reverse = ("".join(reverseseq))
+    return reverse
+
+    pass
 
 def get_complement(sequence):
     """Get the complement of a `sequence` of nucleotides.
