@@ -34,11 +34,15 @@ def translate_sequence(rna_sequence, genetic_code):
         for input in range (0, len(rna), 3):
             codon = rna[input:input + 3]
             translation += genetic_code[codon]
-        for input in range(0, len(rna), 3):
+        for input in range (0, len(rna), 3):
             codon = rna[input:input + 3]
             translation += genetic_code[codon]
-    if len(rna) == 1:
-        rna = rna[::-1]
+        if len(rna)%3 == 1:
+            rna = rna[::-1]
+        if "*" in str(translation):
+            separate = "*"
+            translation = translation.split(separate, 1)[0]
+            translation = translation.replace("*", "")
     return translation
 
 def get_all_translations(rna_sequence, genetic_code):
