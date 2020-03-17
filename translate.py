@@ -74,12 +74,14 @@ def get_all_translations(rna_sequence, genetic_code):
         `rna_sequence`.
     """
     rna = rna_sequence.upper()
-    translation = ""
+    translation = []
     start = rna.find("AUG")
     starttrans = rna[int(start):]
     for input in range (0, len(starttrans), 3):
         if starttrans[input:input + 3] in genetic_code:
             translation+= genetic_code[starttrans[input:input + 3]]
+        if start == 0:
+            translation = []
     return translation
 
 def get_reverse(sequence):
