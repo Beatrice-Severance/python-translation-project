@@ -97,7 +97,8 @@ def get_complement(sequence):
     >>> get_reverse('ATGC')
     'TACG'
     """
-    sequence = list(sequence.lower())
+    sequence = list(sequence.upper())
+    print("The sequence is: ", sequence)
     complementseq = sequence [::+1]
     complement = ("".join(complementseq))
     return complement
