@@ -127,6 +127,18 @@ def reverse_and_complement(sequence):
     'GCAT'
     """
     sequence = list(sequence.upper())
+    print("The sequence is: ", sequence)
+    complement = ""
+    for input in sequence:
+        if input == "A":
+            complement += "U"
+        if input == "U":
+            complement += "A"
+        if input == "C":
+            complement += "G"
+        if input == "G":
+            complement += "C"
+    return complement
     
 
 def get_longest_peptide(rna_sequence, genetic_code):
