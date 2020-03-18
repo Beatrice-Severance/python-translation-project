@@ -209,7 +209,22 @@ def get_longest_peptide(rna_sequence, genetic_code):
         A string of the longest sequence of amino acids encoded by
         `rna_sequence`.
     """
-    rna_seqs = rna_sequence.upper()
+    peps = get_all_translations(rna_sequence = rna_sequence, genetic_code = genetic_code)
+    rev_and_comp = reverse_and_complement(rna_sequence)
+    rev_tran = get_all_translations(rna_sequence = rev_and_comp, genetic_code = genetic_code)
+    peps += rev_tran
+    if not peps:
+        return ""
+    if len(peps) < 2:
+        return peps[0]
+    most_bases = -1
+    longest_pep = -1
+    for pep, aa_list in enumerate(peps):
+        if len(aa_list) > most_bases:
+            longest_pep = pep
+            most_bases = len(aa_list)
+    return peps[longest_pep]
+    """rna_seqs = rna_sequence.upper()
     aa_list = []
     start_pos = 0
     def translate(start, rna, genetic_code):
@@ -226,7 +241,7 @@ def get_longest_peptide(rna_sequence, genetic_code):
         reversed = ("".join(rev_seqs))
         complement = ""
         for i in reversed:
-            if i == "A": 
+            if i == "A":
                 complement += "U"
             if i == "U":
                 complement += "A"
@@ -251,7 +266,7 @@ def get_longest_peptide(rna_sequence, genetic_code):
         longest_aa == ''
     if aa_list_start != []:
         longest_aa = max((aa_list_start), key=len)
-    return longest_aa
+    return longest_aa"""
 
 if __name__ == '__main__':
     genetic_code = {'GUC': 'V', 'ACC': 'T', 'GUA': 'V', 'GUG': 'V', 'ACU': 'T', 'AAC': 'N', 'CCU': 'P', 'UGG': 'W', 'AGC': 'S', 'AUC': 'I', 'CAU': 'H', 'AAU': 'N', 'AGU': 'S', 'GUU': 'V', 'CAC': 'H', 'ACG': 'T', 'CCG': 'P', 'CCA': 'P', 'ACA': 'T', 'CCC': 'P', 'UGU': 'C', 'GGU': 'G', 'UCU': 'S', 'GCG': 'A', 'UGC': 'C', 'CAG': 'Q', 'GAU': 'D', 'UAU': 'Y', 'CGG': 'R', 'UCG': 'S', 'AGG': 'R', 'GGG': 'G', 'UCC': 'S', 'UCA': 'S', 'UAA': '*', 'GGA': 'G', 'UAC': 'Y', 'GAC': 'D', 'UAG': '*', 'AUA': 'I', 'GCA': 'A', 'CUU': 'L', 'GGC': 'G', 'AUG': 'M', 'CUG': 'L', 'GAG': 'E', 'CUC': 'L', 'AGA': 'R', 'CUA': 'L', 'GCC': 'A', 'AAA': 'K', 'AAG': 'K', 'CAA': 'Q', 'UUU': 'F', 'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'GCU': 'A', 'GAA': 'E', 'AUU': 'I', 'UUG': 'L', 'UUA': 'L', 'UGA': '*', 'UUC': 'F'}
