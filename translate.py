@@ -84,6 +84,13 @@ def get_all_translations(rna_sequence, genetic_code):
                 break
             else: proteins += genetic_code[codon]
         return proteins
+    while start < len(rna):
+        start = rna[start:start + 3]
+        if start == "AUG":
+            translation = translate(start, rna, genetic_code)
+            AA_list.append(translation)
+        start += 1
+    return AA_list
     """rna = rna_sequence.upper()
     translation = []
     start = rna.find("AUG")
