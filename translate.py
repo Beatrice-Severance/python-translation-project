@@ -209,9 +209,9 @@ def get_longest_peptide(rna_sequence, genetic_code):
         A string of the longest sequence of amino acids encoded by
         `rna_sequence`.
     """
-    rna = rna_sequence.upper()
-    AA_list = []
-    start = 0
+    rna_seqs = rna_sequence.upper()
+    aa_list = []
+    start_pos = 0
     def translate(start, rna, genetic_code):
         proteins = ""
         for input in range(start, len(rna), 3):
@@ -220,6 +220,38 @@ def get_longest_peptide(rna_sequence, genetic_code):
                 break
             else: proteins += genetic_code[codon]
         return proteins
+    def reverse_and_complement(rna_seqs):
+        rna_seqs = list(rna_seqs.upper())
+        rev_seqs = rna_seqs[::-1]
+        reversed = ("".join(rev_seqs))
+        complement = ""
+        for i in reversed:
+            if i == "A": 
+                complement += "U"
+            if i == "U":
+                complement += "A"
+            if i == "C":
+                complement += "G"
+            if i == "G":
+                complement += "C"
+        return complement
+    while start_pos < len(rna_seqs):
+        start_codon = rna_seqs[start_pos:start_pos + 3]
+        if start_codon == 'AUG':
+            translation = translate(start_pos, rna_seqs, genetic_code)
+            aa_list.append(translation)
+            rev_and_comp = reverse_and_complement(rna_seqs)
+            translation_back = translate(start_pos, rev_and_comp, genetic_code)
+            aa_list.append(translation_back)
+        start_pos += 1
+    check = 'M'
+    aa_list_start = [idx for idx in aa_list if idx[0].lower() == check.lower()]
+    longest_aa = ''
+    if aa_list_start == []:
+        longest_aa == ''
+    if aa_list_start != []:
+        longest_aa = max((aa_list_start), key=len)
+    return longest_aa
 
 if __name__ == '__main__':
     genetic_code = {'GUC': 'V', 'ACC': 'T', 'GUA': 'V', 'GUG': 'V', 'ACU': 'T', 'AAC': 'N', 'CCU': 'P', 'UGG': 'W', 'AGC': 'S', 'AUC': 'I', 'CAU': 'H', 'AAU': 'N', 'AGU': 'S', 'GUU': 'V', 'CAC': 'H', 'ACG': 'T', 'CCG': 'P', 'CCA': 'P', 'ACA': 'T', 'CCC': 'P', 'UGU': 'C', 'GGU': 'G', 'UCU': 'S', 'GCG': 'A', 'UGC': 'C', 'CAG': 'Q', 'GAU': 'D', 'UAU': 'Y', 'CGG': 'R', 'UCG': 'S', 'AGG': 'R', 'GGG': 'G', 'UCC': 'S', 'UCA': 'S', 'UAA': '*', 'GGA': 'G', 'UAC': 'Y', 'GAC': 'D', 'UAG': '*', 'AUA': 'I', 'GCA': 'A', 'CUU': 'L', 'GGC': 'G', 'AUG': 'M', 'CUG': 'L', 'GAG': 'E', 'CUC': 'L', 'AGA': 'R', 'CUA': 'L', 'GCC': 'A', 'AAA': 'K', 'AAG': 'K', 'CAA': 'Q', 'UUU': 'F', 'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'GCU': 'A', 'GAA': 'E', 'AUU': 'I', 'UUG': 'L', 'UUA': 'L', 'UGA': '*', 'UUC': 'F'}
