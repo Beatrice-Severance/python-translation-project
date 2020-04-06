@@ -57,8 +57,8 @@ def vet_nucleotide_sequence(sequence):
     # any valid RNA and DNA sequence strings, respectively (and only strings of
     # RNA and DNA bases).
     # Read the docstring above for additional clues.
-    rna_pattern_str = r'A|U|C|G{0,}'
-    dna_pattern_str = r'A|T|C|G{0,}'
+    rna_pattern_str = r'(A|U|C|G)*'
+    dna_pattern_str = r'(A|T|C|G)*'
     ##########################################################################
 
     rna_pattern = re.compile(rna_pattern_str)
@@ -119,7 +119,7 @@ def vet_codon(codon):
     # Change `codon_pattern_str` so that it will match any valid codons, and
     # only valid codons.
     # Read the docstring above for additional clues.
-    codon_pattern_str = r'[A|U|G|C|a|u|g|c]{3}'
+    codon_pattern_str = r'(A|U|G|C|a|u|g|c)(A|U|G|C|a|u|g|c)(A|U|G|C|a|u|g|c)$'
     ##########################################################################
 
     codon_pattern = re.compile(codon_pattern_str)
